@@ -13,7 +13,10 @@
     },
     "autoload": {
         "psr-4": {
-            "": "vendor\\gbdsolution\\php-classes\\src"
+            "Gbd\\": "vendor\\gsolution\\php-classes\\src"
         }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.3"
     }
 }
