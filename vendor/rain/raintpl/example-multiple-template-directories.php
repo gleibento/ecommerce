@@ -8,9 +8,12 @@ use Rain\Tpl;
 
 // config
 $config = array(
-    "tpl_dir" => "templates/simple/",
+    "tpl_dir"   => array(
+        "templates/multiple-template-directories/newimplement/",
+        "templates/multiple-template-directories/base/"
+    ),
     "cache_dir" => "cache/",
-    "debug" => true, // set to false to improve the speed
+    "debug"     => true, // set to false to improve the speed
 );
 
 Tpl::configure($config);
@@ -22,13 +25,6 @@ Tpl::registerPlugin(new Tpl\Plugin\PathReplace());
 
 // create the Tpl object
 $tpl = new Tpl;
+$tpl->draw("subfolder/index");
 
-// assign a variable
-$tpl->assign("name", "Obi Wan Kenoby");
-
-// assign an array
-$tpl->assign("week", array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
-
-// draw the template
-$tpl->draw("simple_template");
 ?>
