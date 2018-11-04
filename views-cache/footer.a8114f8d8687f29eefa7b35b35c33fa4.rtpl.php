@@ -1,4 +1,4 @@
-<footer class="main-footer">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
         Anything you want

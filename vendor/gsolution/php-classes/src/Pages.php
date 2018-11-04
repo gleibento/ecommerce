@@ -15,19 +15,23 @@ class Pages {
     private $tpl;
     private $options = [];
     private $defaults = [
+        "header" => true,
+        "footer" => true,
         "data" => []
     ];
- private function setData($data=array()) {
+
+    private function setData($data = array()) {
         foreach ($data as $key => $value) {
             $this->tpl->assign($key, $value);
         }
     }
-    public function __construct($opts = array(),$tpl_dir ="/views/") {
+
+    public function __construct($opts = array(), $tpl_dir = "views/") {
         $this->options = array_merge($this->defaults, $opts);
 
         $config = array(
-            "tpl_dir" => $_SERVER["DOCUMENT_ROOT"] .$tpl_dir ,
-            "cache_dir" => $_SERVER["DOCUMENT_ROOT"] . "views-cache/",
+            "tpl_dir" => $_SERVER["DOCUMENT_ROOT"] . $tpl_dir,
+            "cache_dir" => $_SERVER["DOCUMENT_ROOT"] . "/views-cache/",
             "debug" => FALSE,
         );
 
@@ -35,16 +39,18 @@ class Pages {
         Tpl::configure($config);
         $this->tpl = new Tpl;
         $this->setData($this->options["data"]);
-        $this->tpl->draw("header");
+        if ($this->options["header"] === TRUE)
+            $this->tpl->draw("header");
     }
-   
+
     public function setTpl($nome, $data = array(), $returnHTML = false) {
         $this->setData($data);
         return $this->tpl->draw($nome, $returnHTML);
     }
 
     public function __destruct() {
-        $this->tpl->draw("footer");
+        if ($this->options["footer"] === TRUE)
+            $this->tpl->draw("footer");
     }
 
 }
